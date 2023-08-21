@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -50,6 +52,26 @@ public class BookController {
         try {
             Book book = bookService.deleteBook(dto);
             bookService.findBookById(id);
+            return new ResponseEntity<>(book, HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Book>> getAllBooks() {
+        try {
+             List<Book> books = bookService.getAllBooks();
+            return new ResponseEntity<>(books, HttpStatus.OK);
+        } catch (Exception exception) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping("/{isbn}")
+    public ResponseEntity<List<Book>> getBookByIsbn(@PathVariable(name = "isbn") String isbn) {
+        try {
+            List<Book> book = bookService.getBooksByIsbn(isbn);
             return new ResponseEntity<>(book, HttpStatus.OK);
         } catch (Exception exception) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);

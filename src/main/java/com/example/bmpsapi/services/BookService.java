@@ -6,6 +6,9 @@ import com.example.bmpsapi.repositories.BookRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class BookService {
 
@@ -50,5 +53,25 @@ public class BookService {
             System.out.println("Geen entiteit kunnen vinden met dit id");
             throw  exception;
         }
+    }
+
+    public List<Book> getAllBooks() {
+        try {
+            List<Book> books = bookRepository.findAll();
+            return books;
+        } catch (Exception exception) {
+            System.out.println("Niet alle boeken kunnen weergeven");
+            throw exception;
+        }
+    }
+
+    public List<Book> getBooksByIsbn(String isbn) {
+        List<Book> booksByIsbn = new ArrayList<>();
+        for (Book book: getAllBooks()) {
+            if (book.getIsbn().contains(isbn)) {
+                booksByIsbn.add(book);
+            }
+        }
+        return booksByIsbn;
     }
 }
