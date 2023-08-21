@@ -1,7 +1,7 @@
 package com.example.bmpsapi.entities;
 
 import com.example.bmpsapi.models.AccountDTO;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 public class Account {

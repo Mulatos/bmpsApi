@@ -6,18 +6,22 @@ public class AuteurDTO {
 
     public Long id;
 
+    public String auteurName;
+
     public String geboorteDatum;
 
     public String biografie;
 
-    public AuteurDTO(Long pId, String pGeboorteDatum, String pBiografie) {
+    public AuteurDTO(Long pId,String pAuteurName, String pGeboorteDatum, String pBiografie) {
         this.id = pId;
+        this.auteurName = pAuteurName;
         this.geboorteDatum = pGeboorteDatum;
         this.biografie = pBiografie;
     }
 
     public AuteurDTO(Auteur entity) {
         this.id = entity.getId();
+        this.auteurName = entity.getAuteurName();
         this.geboorteDatum = entity.getGeboorteDatum();
         this.biografie = entity.getBiografie();
     }
@@ -44,5 +48,13 @@ public class AuteurDTO {
 
     public void setBiografie(String biografie) {
         this.biografie = biografie;
+    }
+
+    public String getAuteurName() {
+        return auteurName;
+    }
+
+    public void setAuteurName(String auteurName) {
+        this.auteurName = auteurName;
     }
 }

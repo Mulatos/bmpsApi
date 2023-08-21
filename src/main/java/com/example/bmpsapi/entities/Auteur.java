@@ -1,7 +1,7 @@
 package com.example.bmpsapi.entities;
 
 import com.example.bmpsapi.models.AuteurDTO;
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -13,6 +13,9 @@ public class Auteur {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "auteur_id", nullable = false)
     private Long id;
+
+    @Column(name = "auteur_name", nullable = false)
+    private String auteurName;
 
     @Column(name = "geboortedatum", nullable = false)
     private String geboorteDatum;
@@ -33,6 +36,7 @@ public class Auteur {
     }
 
     public Auteur(AuteurDTO dto) {
+        this.auteurName = dto.getAuteurName();
         this.geboorteDatum = dto.getGeboorteDatum();
         this.biografie = dto.getBiografie();
     }
@@ -58,5 +62,13 @@ public class Auteur {
 
     public void setBiografie(String biografie) {
         this.biografie = biografie;
+    }
+
+    public String getAuteurName() {
+        return auteurName;
+    }
+
+    public void setAuteurName(String auteurName) {
+        this.auteurName = auteurName;
     }
 }
